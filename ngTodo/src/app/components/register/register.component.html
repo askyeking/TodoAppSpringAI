@@ -1,0 +1,19 @@
+<form class="px-5" name="registerForm" >
+        <h3 class="px-5 pt-4 pb-3" >Register An Account</h3>
+        <div class="row justify-content-center">
+            <label class="col-sm-2 col-form-label" for="email"> Email </label>
+            <input class="form-control col" type="text" name="email"  placeholder="email" [(ngModel)]="newUser.email">
+        </div>
+        <div class="row justify-content-center">
+            <label class="form-label col-2" for="username"> Username </label>
+            <input class="form-control col" type="text" name="username" placeholder="username" [(ngModel)]="newUser.username">
+        </div>
+        <div class="row justify-content-center" >
+            <label class="form-label col-2" for="password"> Password </label>
+            <input class="form-control col" type="text" name="password" placeholder="password" [(ngModel)]="newUser.password">
+        </div>
+
+         <div class="row justify-content-center pt-2">
+            <button class="btn btn-success col-1" (click)="register(newUser)">Submit</button>
+        </div>
+</form>

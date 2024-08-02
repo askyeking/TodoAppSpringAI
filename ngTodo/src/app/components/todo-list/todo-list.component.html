@@ -1,0 +1,87 @@
+<h1>{{title}} <span class="badge" [ngClass]="getTodoCount()>=10?'bg-danger':getTodoCount()>=5?'bg-warning':'bg-success'">{{getTodoCount()}}</span> </h1>
+
+<div *ngIf="! selected">
+  <div class="form-check">
+    <label class="form-check-label" for="showComplete">Show completed tasks</label>
+    <input class="form-check-input" type="checkbox" name="showComplete" [(ngModel)]="showComplete">
+  </div>
+  <table class="table table-striped table-hover">
+    <thead class="table-dark">
+      <tr>
+        <th>Task</th>
+        <th>Mark</th>
+        <th>Completed</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let todo of todos|incomplete: showComplete" [ngClass]="todo.completed?'completed':''">
+        <td (click)="displayTodo(todo)">{{todo.task}}</td>
+        <td> <input (change)="updateTodo(todo, false)" [(ngModel)]="todo.completed" type="checkbox" name="completed">  </td>
+        <td>{{todo.completed}}</td>
+        <td><button (click)="deleteTodo(todo.id)" class="btn btn-danger">X</button></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <button class="btn btn-primary" (click)="getSuggestions()">Suggest New Tasks</button>
+
+  <table class="table table-striped table-hover">
+    <thead class="table-dark">
+      <tr>
+        <th>Suggested Task</th>
+        <th>Add Task</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let suggestion of suggestions; let i = index">
+        <td >{{suggestion}}</td>
+        <td><button class="btn btn-danger" (click)="addSuggestion(suggestion, i)">Add Todo</button></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <form class="container">
+    <div class="row">
+      <input class="form-control col" [(ngModel)]="newTodo.task" type="text" name="task">
+      <button class="btn btn-primary col-auto" (click)="addTodo(newTodo)">Add Todo</button>
+    </div>
+  </form>
+
+  
+ 
+
+  
+
+</div>
+
+<div *ngIf="selected && ! editTodo">
+  <h4>{{selected.id}}: {{selected.task}}</h4>
+  Description:
+  <blockquote>{{selected.description}}</blockquote>
+  <p>Completed: {{selected.completed}}</p>
+  <button class="btn btn-outline-danger" (click)="displayTable()">Back</button>
+  <button class="btn btn-outline-primary" (click)="setEditTodo()">Edit</button>
+</div>
+
+<div *ngIf="editTodo">
+
+  <form>
+    <div class="row">
+      <label class="form-label col-auto" for="task">Task</label>
+      <input class="form-control col" [(ngModel)]="editTodo.task" type="text" name="task"> <br>
+    </div>
+    <div class="row">
+      <label class="form-label col-auto" for="description">Description</label>
+      <textarea class="form-control col" [(ngModel)]="editTodo.description" type="text" name="description"></textarea> <br>
+    </div>
+    <div class="form-check">
+      <label class="form-check-label" for="completed">Completed</label>
+      <input class="form-check-input" [(ngModel)]="editTodo.completed" type="checkbox" name="completed"> <br>
+    </div>
+    <button class="btn btn-danger" (click)="editTodo = null">Cancel</button>
+    <button class="btn btn-success" (click)="updateTodo(editTodo)">Save</button>
+  </form>
+
+</div>
+
