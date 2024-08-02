@@ -1,11 +1,7 @@
 package com.skilldistillery.todos.controllers;
 
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -53,17 +49,19 @@ public class OpenAIController {
 	public String[] generateSuggestions(Principal principal, HttpServletRequest req, HttpServletResponse res) {
 		
 		Set<Todo> currentTodoList = this.todoService.getActiveTodos(principal.getName());
+		
 		StringBuilder currentTodosText = new StringBuilder();
 		for (Todo todo : currentTodoList) {
 			currentTodosText.append(todo.getTask()).append("\n");
 		}
 		
-		System.out.println(currentTodosText.toString());
 		String aiResponse =  this.chatClient.prompt()
     			.user(u -> u.text("Give me 5 suggestions for items to add to my todo list. I've already got the following on my list, make sure you do not suggest a todo I already have in my list.:\n{todos}")
     					.param("todos", currentTodosText.toString()))
 				.call().content();
+		
 		String[] suggestions = aiResponse.split(",");
+		
 		return suggestions;
 	}
 
