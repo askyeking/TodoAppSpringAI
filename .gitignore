@@ -1,0 +1,72 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+
+# IDEs
+# VSCode
+.vscode/
+# Sublime Text
+*.sublime-workspace
+*.sublime-project
+# Eclipse
+.metadata/
+*.log
+*.tmp
+*.bak
+*.swp
+*.swo
+
+# Node.js
+node_modules/
+
+# Java
+*.class
+*.jar
+*.war
+*.ear
+*.classpath
+*.project
+*.settings/
+
+# Spring Boot
+spring-boot-devtools.jar
+*.iml
+*.log
+*.tmp
+*.swp
+*.swo
+
+# Angular
+/dist/
+/node_modules/
+/.angular
+
+# MySQL
+*.sql
+*.sqlite
+*.db
+
+# Logs
+*.log
+
+# Dependency directories
+bower_components/
+jspm_packages/
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Gradle
+.gradle/
+build/
+gradle-app.setting
+gradle-wrapper.jar
+gradle-wrapper.properties
